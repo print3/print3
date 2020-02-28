@@ -31,7 +31,7 @@ export default class Home extends Component {
 		const cards = Array(6).fill(card);
 
 
-		const repos = Array(6).fill(
+		const repos = Array(15).fill(
 			<LayoutGrid.Cell desktopCols="4" phoneCols="12">
 				<Repo />
 			</LayoutGrid.Cell>
@@ -39,7 +39,6 @@ export default class Home extends Component {
 
 		return (
 			<div class={`${style.home} page`}>
-				<h1>print^3</h1>
 				<LayoutGrid>
 					<LayoutGrid.Inner>
 						{repos}

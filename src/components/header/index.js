@@ -10,7 +10,7 @@ import 'preact-material-components/Dialog/style.css';
 import 'preact-material-components/Drawer/style.css';
 import 'preact-material-components/List/style.css';
 import 'preact-material-components/TopAppBar/style.css';
-// import style from './style';
+import style from './style';
 
 export default class Header extends Component {
 	closeDrawer() {
@@ -61,7 +61,7 @@ export default class Header extends Component {
 							<TopAppBar.Icon menu onClick={this.openDrawer}>
 								menu
 							</TopAppBar.Icon>
-							<TopAppBar.Title>print^3</TopAppBar.Title>
+							<TopAppBar.Title class={style.title}>print^3</TopAppBar.Title>
 						</TopAppBar.Section>
 						<TopAppBar.Section align-end shrink-to-fit onClick={this.openSettings}>
 							<TopAppBar.Icon>settings</TopAppBar.Icon>
