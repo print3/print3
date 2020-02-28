@@ -6,6 +6,8 @@ import 'preact-material-components/Button/style.css';
 import 'preact-material-components/LayoutGrid/style.css';
 import style from './style';
 
+import Repo from '../../components/repo';
+
 export default class Home extends Component {
 	render() {
 
@@ -28,14 +30,19 @@ export default class Home extends Component {
 
 		const cards = Array(6).fill(card);
 
-		console.log(cards)
+
+		const repos = Array(6).fill(
+			<LayoutGrid.Cell desktopCols="4" phoneCols="12">
+				<Repo />
+			</LayoutGrid.Cell>
+		)
 
 		return (
 			<div class={`${style.home} page`}>
 				<h1>print^3</h1>
 				<LayoutGrid>
 					<LayoutGrid.Inner>
-						{cards}
+						{repos}
 					</LayoutGrid.Inner>
 				</LayoutGrid>
 			</div>
