@@ -19,12 +19,19 @@ export default class Repo extends Component {
     this.state.url = url;
     this.state.title = title;
     this.state.description = description;
+    this.state.photo = `${this.state.url}/raw/master/assets/cube.png`
+
+    this.state.onClick = e => {
+      e.preventDefault();
+
+      window.location.href = this.state.url;
+    }
   }
 
 	render() {
 		return (
       <LayoutGrid.Cell desktopCols="4" phoneCols="12">
-  			<div class={`${style.repo}`}>
+  			<div class={`${style.repo}`} onClick={this.state.onClick}>
   				<Card>
             <img class={style.repo} src={this.state.photo}></img>
             <div class={style.cardBody}>

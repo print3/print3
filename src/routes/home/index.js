@@ -38,7 +38,7 @@ export default class Home extends Component {
 
 	async fetchRepos() {
 		const response = await this.gh.search.repos({
-			q: 'topic:esp32',
+			q: 'topic:print3-model',
 			sort: 'stars',
 			per_page: 30
 		});
@@ -64,7 +64,7 @@ export default class Home extends Component {
 
 		const repos = this.state.repos.map(repo => (
 			<Repo
-				url={repo.url}
+				url={repo.html_url}
 				photo=""
 				title={repo.full_name}
 				description={repo.description}
