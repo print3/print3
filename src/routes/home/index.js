@@ -1,41 +1,75 @@
 import { h, Component } from 'preact';
 import Card from 'preact-material-components/Card';
 import LayoutGrid from 'preact-material-components/LayoutGrid';
+import LinearProgress from 'preact-material-components/LinearProgress';
 import 'preact-material-components/Card/style.css';
 import 'preact-material-components/Button/style.css';
 import 'preact-material-components/LayoutGrid/style.css';
+import 'preact-material-components/LinearProgress/style.css';
 import style from './style';
 
 import Repo from '../../components/repo';
 
+import { Octokit } from '@octokit/rest';
+
+
 export default class Home extends Component {
+	state = {
+		loading: true
+	}
+
+	constructor() {
+		super();
+
+		const token = window.localStorage.getItem('token');
+
+		if(token) {
+			this.gh = new Octokit({
+				auth: token
+			});
+
+			console.log(this.gh)
+
+			this.fetchRepos();
+		} else {
+			console.log('go to log in')
+		}
+	}
+
+	async fetchRepos() {
+		const response = await this.gh.search.repos({
+			q: 'topic:esp32',
+			sort: 'stars',
+			per_page: 30
+		});
+
+		const repos = response.data.items;
+
+		console.log(repos)
+
+		this.setState({
+			repos: repos,
+			loading: false,
+		});
+	}
+
 	render() {
+		if(this.state.loading) {
+			return (
+				<div class={style.loader}>
+					<LinearProgress indeterminate />
+				</div>
+			);
+		}
 
-		const card = (
-			<LayoutGrid.Cell desktopCols="4" phoneCols="12">
-				<Card>
-					<div class={style.cardHeader}>
-						<h2 class=" mdc-typography--title">Home card</h2>
-						<div class=" mdc-typography--caption">Welcome to home route</div>
-					</div>
-					<div class={style.cardBody}>
-						Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt.
-					</div>
-					<Card.Actions>
-						<Card.ActionButton>OKAY</Card.ActionButton>
-					</Card.Actions>
-				</Card>
-			</LayoutGrid.Cell>
-		)
-
-		const cards = Array(6).fill(card);
-
-
-		const repos = Array(15).fill(
-			<LayoutGrid.Cell desktopCols="4" phoneCols="12">
-				<Repo />
-			</LayoutGrid.Cell>
-		)
+		const repos = this.state.repos.map(repo => (
+			<Repo
+				url={repo.url}
+				photo=""
+				title={repo.full_name}
+				description={repo.description}
+			/> )
+		);
 
 		return (
 			<div class={`${style.home} page`}>

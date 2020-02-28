@@ -12,3 +12,7 @@
 .cardBody {
   padding: 16px;
 }
+
+.loader {
+	padding-top: 64px;
+}

@@ -8,6 +8,9 @@
   padding-left: 16px;
   padding-right: 16px;
   padding-bottom: 16px;
+
+	height: 150px;
+	overflow: hidden;
 }
 
 .repo img {
