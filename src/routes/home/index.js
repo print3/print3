@@ -10,7 +10,7 @@ export default class Home extends Component {
 	render() {
 
 		const card = (
-			<LayoutGrid.Cell desktopCols="4" tabletCols="6" phoneCols="12">
+			<LayoutGrid.Cell desktopCols="4" phoneCols="12">
 				<Card>
 					<div class={style.cardHeader}>
 						<h2 class=" mdc-typography--title">Home card</h2>
