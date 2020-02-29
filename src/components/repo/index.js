@@ -5,26 +5,47 @@ import 'preact-material-components/Card/style.css';
 import 'preact-material-components/LayoutGrid/style.css';
 import style from './style';
 
+import { Octokit } from '@octokit/rest';
+
 export default class Repo extends Component {
-
-  state = {
-    url: '',
-    photo: 'https://github.com/afflitto/Pixel_Rain/raw/master/Screenshots/face.png',
-    title: 'repo-title',
-    description: 'short repo description',
-  }
-
-  constructor({ url, title, description }) {
+  constructor({ url, title, description, owner, repo }) {
     super();
+
+    this.gh = new Octokit({
+      token: window.localStorage.getItem('token')
+    });
+
     this.state.url = url;
     this.state.title = title;
     this.state.description = description;
-    this.state.photo = `${this.state.url}/raw/master/assets/cube.png`
+    this.state.owner = owner;
+    this.state.repo = repo;
+
+    this.fetchManifest();
 
     this.state.onClick = e => {
       e.preventDefault();
 
       window.location.href = this.state.url;
+    }
+  }
+
+  async fetchManifest() {
+    try {
+      const response = await this.gh.repos.getContents({
+        owner: this.state.owner,
+        repo: this.state.repo,
+        path: 'manifest.json',
+      });
+
+      const manifest = atob(response.data.content);
+      const photoURL = JSON.parse(manifest).coverPhoto;
+
+      this.setState({
+        photo: this.state.url + '/raw/master' + photoURL
+      });
+    } catch(err) {
+      console.error(err);
     }
   }
 

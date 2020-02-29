@@ -8,10 +8,9 @@ import 'preact-material-components/LayoutGrid/style.css';
 import 'preact-material-components/LinearProgress/style.css';
 import style from './style';
 
+import { Octokit } from '@octokit/rest'
+
 import Repo from '../../components/repo';
-
-import { Octokit } from '@octokit/rest';
-
 
 export default class Home extends Component {
 	state = {
@@ -65,9 +64,10 @@ export default class Home extends Component {
 		const repos = this.state.repos.map(repo => (
 			<Repo
 				url={repo.html_url}
-				photo=""
 				title={repo.full_name}
 				description={repo.description}
+				owner={repo.owner.login}
+				repo={repo.name}
 			/> )
 		);
 
