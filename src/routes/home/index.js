@@ -17,7 +17,7 @@ export default class Home extends Component {
 		loading: true
 	}
 
-	constructor() {
+	constructor({ user }) {
 		super();
 
 		const token = window.localStorage.getItem('token');
@@ -29,22 +29,25 @@ export default class Home extends Component {
 
 			console.log(this.gh)
 
-			this.fetchRepos();
+			this.fetchRepos(user);
 		} else {
 			console.log('go to log in')
 		}
 	}
 
-	async fetchRepos() {
+	async fetchRepos(user) {
+		let query = 'topic:print3-model';
+		if(user) {
+			query += ` user:${user}`;
+		}
+		
 		const response = await this.gh.search.repos({
-			q: 'topic:print3-model',
+			q: query,
 			sort: 'stars',
 			per_page: 30
 		});
 
 		const repos = response.data.items;
-
-		console.log(repos)
 
 		this.setState({
 			repos: repos,
