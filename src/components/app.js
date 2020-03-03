@@ -1,11 +1,12 @@
 import { h, Component } from 'preact';
 import { Router } from 'preact-router';
 
+import 'preact-material-components/Theme/style.css';
+
 import Header from './header';
 import Home from '../routes/home';
 import Profile from '../routes/profile';
 import NotFound from '../routes/404';
-import User from '../routes/user';
 // import Home from 'async!../routes/home';
 // import Profile from 'async!../routes/profile';
 
@@ -19,6 +20,8 @@ export default class App extends Component {
 			currentUrl: e.url
 		});
 	};
+
+	theme = null
 
 	render() {
 		return (
