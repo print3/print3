@@ -93,11 +93,9 @@ export default class Home extends Component {
 
 
 		if(this.props.user) {
-			header = <h1>User: {this.props.user}</h1>
-			console.log(backHome)
-			header = backHome
+			header = <div><h1>User: {this.props.user}</h1> {backHome}</div>
 		} else if(this.props.searchQuery) {
-			header = <h1>Search: {this.props.searchQuery}</h1>
+			header = <div><h1>Search: {this.props.searchQuery}</h1> {backHome}</div>
 		} else {
 			header = <h1>Home</h1>
 		}
