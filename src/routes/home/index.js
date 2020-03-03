@@ -40,7 +40,7 @@ export default class Home extends Component {
 		if(user) {
 			query += ` user:${user}`;
 		}
-		
+
 		const response = await this.gh.search.repos({
 			q: query,
 			sort: 'stars',
