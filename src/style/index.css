@@ -57,5 +57,10 @@ html, body {
 }
 
 :root {
-	--mdc-theme-primary: #4bacb8
+	--mdc-theme-primary: #4bacb8 !important;
+	--mdc-theme-secondary: white !important;
+}
+
+.mdc-floating-label {
+	color: black !important;
 }
