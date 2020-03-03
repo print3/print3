@@ -30,6 +30,7 @@ export default class App extends Component {
 				<Router onChange={this.handleRoute}>
 					<Home path="/" />
 					<Home path="/user/:user" />
+					<Home path="/search/:searchQuery" />
 					<Profile path="/profile/" user="me" />
 					<Profile path="/profile/:user" />
 					<NotFound default />

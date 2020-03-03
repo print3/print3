@@ -6,6 +6,7 @@ import List from 'preact-material-components/List';
 import Dialog from 'preact-material-components/Dialog';
 import Switch from 'preact-material-components/Switch';
 import TextField from 'preact-material-components/TextField';
+import CollapsibleSearchBar from '../collapsibleSearchBar';
 import 'preact-material-components/Switch/style.css';
 import 'preact-material-components/Dialog/style.css';
 import 'preact-material-components/Drawer/style.css';
@@ -67,7 +68,7 @@ export default class Header extends Component {
 							<TopAppBar.Title class={style.title}>print^3</TopAppBar.Title>
 						</TopAppBar.Section>
 						<TopAppBar.Section align-end>
-							<TextField label='Search' class={style.search}/>
+							<CollapsibleSearchBar />
 						</TopAppBar.Section>
 					</TopAppBar.Row>
 				</TopAppBar>
