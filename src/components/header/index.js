@@ -5,11 +5,13 @@ import Drawer from 'preact-material-components/Drawer';
 import List from 'preact-material-components/List';
 import Dialog from 'preact-material-components/Dialog';
 import Switch from 'preact-material-components/Switch';
+import TextField from 'preact-material-components/TextField';
 import 'preact-material-components/Switch/style.css';
 import 'preact-material-components/Dialog/style.css';
 import 'preact-material-components/Drawer/style.css';
 import 'preact-material-components/List/style.css';
 import 'preact-material-components/TopAppBar/style.css';
+import 'preact-material-components/TextField/style.css';
 import style from './style';
 
 export default class Header extends Component {
@@ -34,6 +36,7 @@ export default class Header extends Component {
 
 	goHome = this.linkTo('/');
 	goToMyProfile = this.linkTo('/profile');
+	goToGithub = () => { window.location.href = 'https://github.com/' };
 
 	toggleDarkTheme = () => {
 		this.setState(
@@ -63,8 +66,8 @@ export default class Header extends Component {
 							</TopAppBar.Icon>
 							<TopAppBar.Title class={style.title}>print^3</TopAppBar.Title>
 						</TopAppBar.Section>
-						<TopAppBar.Section align-end shrink-to-fit onClick={this.openSettings}>
-							<TopAppBar.Icon>settings</TopAppBar.Icon>
+						<TopAppBar.Section align-end>
+							<TextField label='Search' class={style.search}/>
 						</TopAppBar.Section>
 					</TopAppBar.Row>
 				</TopAppBar>
@@ -77,6 +80,10 @@ export default class Header extends Component {
 						<Drawer.DrawerItem selected={props.selectedRoute === '/profile'} onClick={this.goToMyProfile}>
 							<List.ItemGraphic>account_circle</List.ItemGraphic>
 							Profile
+						</Drawer.DrawerItem>
+						<Drawer.DrawerItem onClick={this.goToGithub}>
+							<List.ItemGraphic>account_circle</List.ItemGraphic>
+							Github
 						</Drawer.DrawerItem>
 					</Drawer.DrawerContent>
 				</Drawer>
