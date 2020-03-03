@@ -16,3 +16,11 @@
 .loader {
 	padding-top: 64px;
 }
+
+.backButton {
+	width: auto;
+}
+
+.backButton i {
+	margin-right: 10px;
+}
