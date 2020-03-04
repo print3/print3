@@ -83,14 +83,12 @@ export default class Home extends Component {
 		);
 
 		let header;
-		// const backHome = <a href="/" class={style.backButton}><Icon>arrow_back</Icon>Back</a>
 		const backHome = (
 			<IconButton class={style.backButton} onClick={()=>{window.location="/"}}>
 				<IconButton.Icon>arrow_back</IconButton.Icon>
 				<span>Back</span>
 			</IconButton>
 		)
-
 
 		if(this.props.user) {
 			header = <div><h1>User: {this.props.user}</h1> {backHome}</div>
