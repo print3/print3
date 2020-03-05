@@ -31,6 +31,7 @@ export default class App extends Component {
 					<Home path="/" />
 					<Home path="/user/:user" />
 					<Home path="/search/:searchQuery" />
+					<Home path="/callback/:params?" />
 					<Profile path="/profile/" user="me" />
 					<Profile path="/profile/:user" />
 					<NotFound default />

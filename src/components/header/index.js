@@ -37,7 +37,29 @@ export default class Header extends Component {
 
 	goHome = this.linkTo('/');
 	goToMyProfile = this.linkTo('/profile');
-	goToGithub = () => { window.location.href = 'https://github.com/' };
+	logIntoGithub = () => {
+		const randState = Math.floor(Math.random()*Math.pow(2, 48)).toString(16);
+		const now = new Date().getTime();
+		const storeState = JSON.stringify({
+			state: randState,
+			time: now
+		});
+		window.localStorage.setItem('state', storeState);
+
+		const oauth = {
+			client_id: '83429a3e04fdaf219e32',
+			redirect_uri: 'https://www.print3.org/callback',
+			scope: 'repos',
+			state: randState,
+		}
+
+		window.location.href = `https://github.com/login/oauth/authorize?
+			client_id=${oauth.client_id}&
+			redirect_uri=${oauth.redirect_uri}&
+			scope=${oauth.scope}&
+			state=${oauth.state}
+		`;
+	};
 
 	toggleDarkTheme = () => {
 		this.setState(
@@ -82,7 +104,7 @@ export default class Header extends Component {
 							<List.ItemGraphic>account_circle</List.ItemGraphic>
 							Profile
 						</Drawer.DrawerItem>
-						<Drawer.DrawerItem onClick={this.goToGithub}>
+						<Drawer.DrawerItem onClick={this.logIntoGithub}>
 							<List.ItemGraphic>account_circle</List.ItemGraphic>
 							Github
 						</Drawer.DrawerItem>

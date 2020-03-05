@@ -39,6 +39,56 @@ export default class Home extends Component {
 		} else {
 			console.log('go to log in')
 		}
+
+		if(props.code && props.state) {
+			//check state matches
+			const expectedStateJSON = window.localStorage.getItem('state');
+			if(expectedStateJSON) {
+				const expectedState = JSON.parse(expectedStateJSON).state;
+				if(expectedState === props.state) {
+					this.fetchAuthToken(props.code, props.state);
+				} else {
+					console.error('state mismatch!')
+				}
+			} else {
+				console.error('no state saved!')
+			}
+		}
+	}
+
+	async fetchAuthToken(code, state) {
+		console.log(code, state);
+
+		const authJson = await fetch(
+			'https://3p2fxbq423.execute-api.us-east-1.amazonaws.com/dev/auth', {
+				method: 'POST',
+				body: JSON.stringify({ code, state })
+			}
+		);
+
+		const auth = await authJson.json();
+		console.log(auth);
+
+		// TODO: put error in a dialog
+		// <Dialog ref={this.dialogRef}>
+		// 	<Dialog.Header>Settings</Dialog.Header>
+		// 	<Dialog.Body>
+		// 		<div>
+		// 			Enable dark theme <Switch onClick={this.toggleDarkTheme} />
+		// 		</div>
+		// 	</Dialog.Body>
+		// 	<Dialog.Footer>
+		// 		<Dialog.FooterButton accept>OK</Dialog.FooterButton>
+		// 	</Dialog.Footer>
+		// </Dialog>
+
+		if(auth.error) {
+			console.log(auth.error, auth.error_description);
+		} else if(auth.access_token) {
+			window.localStorage.setItem('token', auth.access_token);
+			window.localStorage.setItem('state', null);
+			window.location.href = '/';
+		}
 	}
 
 	async fetchRepos({ user, searchQuery }) {
