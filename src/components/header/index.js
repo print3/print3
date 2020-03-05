@@ -49,7 +49,7 @@ export default class Header extends Component {
 		const oauth = {
 			client_id: '83429a3e04fdaf219e32',
 			redirect_uri: 'https://www.print3.org/callback',
-			scope: 'repos',
+			scope: 'public_repo, read:user',
 			state: randState,
 		}
 
