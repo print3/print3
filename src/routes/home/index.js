@@ -14,7 +14,7 @@ import 'preact-material-components/IconButton/style.css';
 
 import style from './style';
 
-import { Octokit } from '@octokit/rest'
+import { github } from '../../github.js';
 
 import Repo from '../../components/repo';
 
@@ -28,17 +28,8 @@ export default class Home extends Component {
 
 		const token = window.localStorage.getItem('token');
 
-		if(token) {
-			this.gh = new Octokit({
-				auth: token
-			});
-
-			console.log(this.gh)
-
-			this.fetchRepos(props);
-		} else {
-			console.log('go to log in')
-		}
+		this.gh = github;
+		this.fetchRepos(props);
 
 		if(props.code && props.state) {
 			//check state matches

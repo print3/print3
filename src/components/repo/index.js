@@ -5,15 +5,13 @@ import 'preact-material-components/Card/style.css';
 import 'preact-material-components/LayoutGrid/style.css';
 import style from './style';
 
-import { Octokit } from '@octokit/rest';
+import { github } from '../../github.js';
 
 export default class Repo extends Component {
   constructor({ url, title, description, owner, repo }) {
     super();
 
-    this.gh = new Octokit({
-      token: window.localStorage.getItem('token')
-    });
+    this.gh = github;
 
     this.state.url = url;
     this.state.title = title;
