@@ -77,7 +77,7 @@ export default class Home extends Component {
 			console.log(auth.error, auth.error_description);
 		} else if(auth.access_token) {
 			window.localStorage.setItem('token', auth.access_token);
-			window.localStorage.setItem('state', null);
+			window.localStorage.removeItem('state');
 			window.location.href = '/';
 		}
 	}
